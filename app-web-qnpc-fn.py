@@ -27,8 +27,7 @@ def stream_logs():
         try:
             num_articles = int(request.form.get("num_articles", 0))
             if num_articles <= 0:
-                yield "data: ❌ Số lượng bài viết không hợp lệ.
-\n"
+                yield "data: ❌ Số lượng bài viết không hợp lệ.\n"
                 return
 
             start_time = time.time()
