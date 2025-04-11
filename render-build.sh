@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
-python -m playwright install chromium
+#!/bin/bash
+pip install -r requirements.txt
+python -m playwright install --with-deps
