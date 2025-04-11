@@ -15,7 +15,7 @@
   <div class="container">
     <h2>Lấy bài viết từ website PC Quảng Ngãi</h2>
     <input type="number" id="num_articles" placeholder="Số lượng bài viết" min="1" />
-    <button onclick="fetchArticles()">🚀 Bắt đầu</button>
+    <button id="fetchBtn" onclick="fetchArticles()">🚀 Bắt đầu</button>
     <div id="logBox"></div>
   </div>
 
@@ -23,7 +23,10 @@
     function fetchArticles() {
       const num = document.getElementById('num_articles').value;
       const logBox = document.getElementById('logBox');
+      const fetchBtn = document.getElementById('fetchBtn');
       logBox.innerText = '';
+      fetchBtn.disabled = true;
+      fetchBtn.innerText = "⏳ Đang xử lý...";
 
       const formData = new FormData();
       formData.append("num_articles", num);
@@ -35,7 +38,11 @@
 
           function read() {
             reader.read().then(({ done, value }) => {
-              if (done) return;
+              if (done) {
+                fetchBtn.disabled = false;
+                fetchBtn.innerText = "🚀 Bắt đầu";
+                return;
+              }
               const chunk = decoder.decode(value, { stream: true });
               chunk.split("\n").forEach(line => {
                 if (line.startsWith("data: ")) {
@@ -47,6 +54,11 @@
             });
           }
           read();
+        })
+        .catch(err => {
+          logBox.innerText = "❌ Không thể kết nối tới API nội bộ.\nVui lòng kiểm tra Flask server!";
+          fetchBtn.disabled = false;
+          fetchBtn.innerText = "🚀 Bắt đầu";
         });
     }
   </script>
