@@ -5,3 +5,5 @@ services:
     plan: free
     region: oregon
     dockerfilePath: Dockerfile
+    buildCommand: docker build -t qnpc-auto-news .
+    startCommand: docker run -p 10000:10000 qnpc-auto-news
