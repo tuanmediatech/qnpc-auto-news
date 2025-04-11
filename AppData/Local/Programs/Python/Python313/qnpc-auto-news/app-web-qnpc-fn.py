@@ -5,7 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import time
 import os
 
-os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(os.getcwd(), "pw-browsers")
+#os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(os.getcwd(), "pw-browsers")
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
