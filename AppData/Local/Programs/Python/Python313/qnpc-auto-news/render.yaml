@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: qnpc-auto-news
+    env: python
+    buildCommand: pip install -r requirements.txt && playwright install chromium
+    startCommand: python app-web-qnpc-fn.py
