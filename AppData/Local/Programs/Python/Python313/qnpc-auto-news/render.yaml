@@ -6,3 +6,4 @@ services:
       pip install -r requirements.txt && playwright install chromium
       bash render-build.sh
     startCommand: python app-web-qnpc-fn.py
+    pythonVersion: 3.11
