@@ -67,10 +67,11 @@ def stream_logs():
     return Response(stream_with_context(generate_logs()), mimetype='text/event-stream')
 
 def get_articles(num_articles):
+    print("🔗 Đang kiểm tra khả năng truy cập trang web...")
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        page.goto("https://pcquangngai.cpc.vn")
+        page.goto("https://pcquangngai.cpc.vn", timeout=60000)
         page.wait_for_selector("#mvcContainer-12285")
 
         articles_locator = page.locator("#mvcContainer-12285").locator("a.title-link")
